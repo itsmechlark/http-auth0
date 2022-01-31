@@ -1,0 +1,16 @@
+require:
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-rspec
+
+inherit_gem:
+  rubocop-shopify: rubocop.yml
+
+AllCops:
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  TargetRubyVersion: 2.7
+  NewCops: enable
+  Exclude:
+    - gemfiles/*
+    - spec/dummy/**/*
