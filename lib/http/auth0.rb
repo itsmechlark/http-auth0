@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-require "dry/configurable"
+require_relative "auth0/configuration"
+require_relative "auth0/version"
 
 module HTTP
   class Auth0
-    extend Dry::Configurable
+    include Configuration
   end
 end
-
-require_relative "auth0/version"
