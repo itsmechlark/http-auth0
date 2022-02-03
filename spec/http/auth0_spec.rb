@@ -40,40 +40,4 @@ RSpec.describe(HTTP::Auth0) do
       it { expect(described_class.config.domain).to(eq(domain)) }
     end
   end
-
-  describe ".token(aud:)" do
-    let(:aud) { "https://api.firstcircle.ph" }
-
-    before do
-      described_class.config.client_id      = client_id
-      described_class.config.client_secret  = client_secret
-      described_class.config.domain         = domain
-    end
-
-    context "when client_id is nil" do
-      before { described_class.config.client_id = nil }
-
-      it do
-        expect { described_class.token(aud: aud) }.to(raise_error(
-          an_instance_of(HTTP::Auth0::ConfigurationError)
-            .and(having_attributes(message: "Missing client_id in configuration"))
-        ))
-      end
-    end
-
-    context "when client_secret is nil" do
-      before { described_class.config.client_secret = nil }
-
-      it do
-        expect { described_class.token(aud: aud) }.to(raise_error(
-          an_instance_of(HTTP::Auth0::ConfigurationError)
-            .and(having_attributes(message: "Missing client_secret in configuration"))
-        ))
-      end
-    end
-
-    context "when client id and secret are provided" do
-      it { expect(described_class.token(aud: aud)).to(eq("IMPLEMENT_ME")) }
-    end
-  end
 end
