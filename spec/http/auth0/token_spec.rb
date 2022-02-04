@@ -2,6 +2,7 @@
 
 RSpec.describe("HTTP::Auth0") do
   subject(:described_class) { HTTP::Auth0 }
+
   let(:client_id)     { "CLIENT_ID" }
   let(:client_secret) { "CLIENT_SECRET" }
   let(:domain)        { "firstcircle.ph" }
@@ -80,6 +81,14 @@ RSpec.describe("HTTP::Auth0") do
       end
 
       it { expect(described_class.token(aud: aud)).to(eq(access_token)) }
+
+      it "does not send multiple request for access token when it got one" do
+        described_class.token(aud: aud)
+        # rubocop:disable RSpec/MessageSpies, RSpec/SubjectStub
+        expect(described_class).not_to(receive(:request_access_token))
+        # rubocop:enable RSpec/MessageSpies, RSpec/SubjectStub
+        described_class.token(aud: aud)
+      end
     end
   end
 end

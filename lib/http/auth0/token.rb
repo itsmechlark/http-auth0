@@ -14,12 +14,18 @@ module HTTP
         validate_configuration(key: :client_id)
         validate_configuration(key: :client_secret)
 
-        request_access_token(aud: aud)
+        if (cached = access_tokens[aud])
+          cached
+        else
+          request_access_token(aud: aud)
+        end
       end
 
       private
 
-      attr_accessor :access_token
+      def access_tokens
+        @access_tokens ||= {}
+      end
 
       def validate_configuration(key:)
         raise ConfigurationError, "Missing #{key} in configuration" if [nil, ""].any?(config.send(key))
@@ -38,14 +44,15 @@ module HTTP
         request.body = body.map { |key, value| "#{key}=#{value}" }.join("&")
 
         response = http.request(request)
-        body = response.read_body
-        auth0_response = JSON.parse(body)
-        @access_token = auth0_response["access_token"]
-        puts "body: #{body}"
-        puts "auth0_response: #{auth0_response}"
-        puts "access_token: #{access_token}"
 
-        access_token
+        case response
+        when Net::HTTPSuccess
+          body = response.read_body
+          auth0_response = JSON.parse(body)
+          auth0_response["access_token"].tap do |access_token|
+            access_tokens[aud] = access_token
+          end
+        end
       end
 
       def request_body(aud:)
