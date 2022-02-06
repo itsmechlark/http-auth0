@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-require "uri"
+require "json"
+require "jwt"
 require "net/http"
 require "openssl"
-require "json"
+require "uri"
 
 module HTTP
   class Auth0
@@ -15,10 +16,9 @@ module HTTP
         validate_configuration(key: :client_secret)
 
         if (cached = access_tokens[aud])
-          cached
-        else
-          request_access_token(aud: aud)
+          return cached unless expired?(token: cached)
         end
+        request_access_token(aud: aud)
       end
 
       private
@@ -29,6 +29,19 @@ module HTTP
 
       def validate_configuration(key:)
         raise ConfigurationError, "Missing #{key} in configuration" if [nil, ""].any?(config.send(key))
+      end
+
+      def expired?(token:)
+        decoded_token = JWT.decode(token, nil, false)
+        payload = decoded_token.first
+        expiration = payload["exp"]
+        current_time = Time.now.to_i
+        expiration_time = Time.at(expiration).to_i
+
+        current_time >= expiration_time
+      rescue StandardError => _e
+        # TODO: Log that token cannot be decoded
+        true
       end
 
       def request_access_token(aud:)
@@ -57,10 +70,10 @@ module HTTP
 
       def request_body(aud:)
         {
-          grant_type: "client_credentials",
+          audience: aud,
           client_id: config.client_id,
           client_secret: config.client_secret,
-          audience: aud,
+          grant_type: "client_credentials",
         }
       end
     end

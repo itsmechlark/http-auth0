@@ -3,6 +3,7 @@ PATH
   specs:
     http-auth0 (0.1.0)
       dry-configurable (~> 0.14)
+      jwt (~> 2.3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -25,6 +26,7 @@ GEM
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.0.1)
     hashdiff (1.0.1)
+    jwt (2.3.0)
     multipart-parser (0.1.1)
     parallel (1.21.0)
     parser (3.1.0.0)
@@ -73,6 +75,7 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
     simplecov-html (0.12.3)
+    timecop (0.9.4)
     unicode-display_width (2.1.0)
     webmock (3.14.0)
       addressable (>= 2.8.0)
@@ -94,6 +97,7 @@ DEPENDENCIES
   rubocop-rspec
   rubocop-shopify (~> 2.4.0)
   simplecov (~> 0.19.0)
+  timecop (~> 0.9.4)
   webmock (~> 3.4)
 
 BUNDLED WITH

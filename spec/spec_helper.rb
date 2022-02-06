@@ -6,6 +6,7 @@ require "http/auth0"
 require "faraday_specs_setup"
 require "simplecov"
 require "dry/configurable/test_interface"
+require "timecop"
 
 SimpleCov.start do
   add_filter "/spec/"

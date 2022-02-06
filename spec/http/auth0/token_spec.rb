@@ -57,6 +57,7 @@ RSpec.describe("HTTP::Auth0") do
       end
 
       before do
+        Timecop.freeze(Time.at(1643881255))
         stub_request(:post, "https://firstcircle.ph/oauth/token")
           .with(
             body: {
@@ -80,12 +81,25 @@ RSpec.describe("HTTP::Auth0") do
           )
       end
 
+      after do
+        Timecop.return
+      end
+
       it { expect(described_class.token(aud: aud)).to(eq(access_token)) }
 
       it "does not send multiple request for access token when it got one" do
         described_class.token(aud: aud)
         # rubocop:disable RSpec/MessageSpies, RSpec/SubjectStub
         expect(described_class).not_to(receive(:request_access_token))
+        # rubocop:enable RSpec/MessageSpies, RSpec/SubjectStub
+        described_class.token(aud: aud)
+      end
+
+      it "requests for a new access token when it's expired" do
+        described_class.token(aud: aud)
+        Timecop.return
+        # rubocop:disable RSpec/MessageSpies, RSpec/SubjectStub
+        expect(described_class).to(receive(:request_access_token))
         # rubocop:enable RSpec/MessageSpies, RSpec/SubjectStub
         described_class.token(aud: aud)
       end
