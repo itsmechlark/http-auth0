@@ -24,6 +24,7 @@ RSpec.describe(HTTP::Auth0) do
       it { expect(described_class.config.client_id).to(eq(client_id)) }
       it { expect(described_class.config.client_secret).to(eq(client_secret)) }
       it { expect(described_class.config.domain).to(eq(domain)) }
+      it { expect(described_class.config.seconds_before_refresh).to(eq(60)) }
     end
   end
 
@@ -38,6 +39,7 @@ RSpec.describe(HTTP::Auth0) do
       it { expect(described_class.config.client_id).to(eq(client_id)) }
       it { expect(described_class.config.client_secret).to(eq(client_secret)) }
       it { expect(described_class.config.domain).to(eq(domain)) }
+      it { expect(described_class.config.seconds_before_refresh).to(eq(60)) }
     end
   end
 end

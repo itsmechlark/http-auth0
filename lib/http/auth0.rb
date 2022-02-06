@@ -10,6 +10,7 @@ module HTTP
     setting(:client_id)
     setting(:client_secret)
     setting(:domain)
+    setting(:seconds_before_refresh, 60)
   end
 end
 

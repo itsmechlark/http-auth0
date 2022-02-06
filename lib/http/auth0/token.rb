@@ -36,7 +36,8 @@ module HTTP
         payload = decoded_token.first
         expiration = payload["exp"]
         current_time = Time.now.to_i
-        expiration_time = Time.at(expiration).to_i
+        seconds_before_refresh = config.seconds_before_refresh
+        expiration_time = Time.at(expiration).to_i - seconds_before_refresh.to_i
 
         current_time >= expiration_time
       rescue StandardError => _e

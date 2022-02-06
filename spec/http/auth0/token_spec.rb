@@ -103,6 +103,15 @@ RSpec.describe("HTTP::Auth0") do
         # rubocop:enable RSpec/MessageSpies, RSpec/SubjectStub
         described_class.token(aud: aud)
       end
+
+      it "requests for a new access token when it's expiring relative to seconds_before_refresh" do
+        described_class.token(aud: aud)
+        Timecop.freeze(Time.at(1643967655 - 60))
+        # rubocop:disable RSpec/MessageSpies, RSpec/SubjectStub
+        expect(described_class).to(receive(:request_access_token))
+        # rubocop:enable RSpec/MessageSpies, RSpec/SubjectStub
+        described_class.token(aud: aud)
+      end
     end
   end
 end
