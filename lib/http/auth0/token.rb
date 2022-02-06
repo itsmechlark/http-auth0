@@ -40,8 +40,8 @@ module HTTP
         expiration_time = Time.at(expiration).to_i - seconds_before_refresh.to_i
 
         current_time >= expiration_time
-      rescue StandardError => _e
-        # TODO: Log that token cannot be decoded
+      rescue StandardError => e
+        config.logger.error(e)
         true
       end
 
@@ -66,6 +66,9 @@ module HTTP
           auth0_response["access_token"].tap do |access_token|
             access_tokens[aud] = access_token
           end
+        else
+          config.logger.warn(response.message)
+          nil
         end
       end
 

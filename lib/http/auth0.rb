@@ -10,7 +10,8 @@ module HTTP
     setting(:client_id)
     setting(:client_secret)
     setting(:domain)
-    setting(:seconds_before_refresh, 60)
+    setting(:logger, default: Logger.new(STDOUT))
+    setting(:seconds_before_refresh, default: 60)
   end
 end
 
