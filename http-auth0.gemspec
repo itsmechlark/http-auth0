@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = ["LICENSE", "README.md"]
 
   s.add_dependency("dry-configurable", "~> 0.14")
+  s.add_dependency("jwt", "~> 2.3.0")
 
   s.add_development_dependency("faraday", "~> 2.0")
 
@@ -39,6 +40,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("rubocop-rspec")
   s.add_development_dependency("rubocop-shopify", "~> 2.4.0")
   s.add_development_dependency("simplecov", "~> 0.19.0")
+  s.add_development_dependency("timecop", "~> 0.9.4")
 
   s.add_development_dependency("multipart-parser", "~> 0.1.1")
   s.add_development_dependency("webmock", "~> 3.4")

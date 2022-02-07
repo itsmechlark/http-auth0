@@ -5,11 +5,19 @@ require "http/auth0"
 # This is the magic bit. It requires a tests suite from the Faraday gem that you can run against your adapter
 require "faraday_specs_setup"
 require "simplecov"
+require "dry/configurable/test_interface"
+require "timecop"
 
 SimpleCov.start do
   add_filter "/spec/"
   minimum_coverage 95
   minimum_coverage_by_file 90
+end
+
+module HTTP
+  class Auth0
+    enable_test_interface
+  end
 end
 
 RSpec.configure do |config|

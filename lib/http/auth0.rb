@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "dry/configurable"
+require_relative "auth0/token"
 
 module HTTP
   class Auth0
@@ -9,6 +10,8 @@ module HTTP
     setting(:client_id)
     setting(:client_secret)
     setting(:domain)
+    setting(:logger, default: Logger.new(STDOUT))
+    setting(:seconds_before_refresh, default: 60)
   end
 end
 
