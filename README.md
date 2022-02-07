@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/carabao-capital/http-auth0/actions/workflows/ci.yaml/badge.svg)](https://github.com/carabao-capital/http-auth0/actions/workflows/ci.yaml)
 
-HTTP abstraction layer for Auth application [RFC](https://github.com/carabao-capital/rfcs/pull/2)
+HTTP client abstraction layer for Auth Application [RFC](https://github.com/carabao-capital/rfcs/pull/2)
 
 ## Installation
 
@@ -15,8 +15,9 @@ end
 ```
 
 And then execute:
-
-    $ bundle
+```bash
+$ bundle
+```
 
 ## Usage
 
@@ -31,7 +32,7 @@ end
 ```
 
 ### Use with your preferred HTTP client
-### Faraday Example
+#### Faraday Example
 
 ```ruby
 require 'faraday'
@@ -45,7 +46,7 @@ end
 conn.post("https://staging-01.api.connect.my.firstcircle.ph/graphql")
 ```
 
-### Net::HTTP Example
+#### Net::HTTP Example
 
 ```ruby
 require 'http/auth0'
