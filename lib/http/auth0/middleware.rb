@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "faraday"
+require "http/auth0"
 
 module HTTP
   class Auth0
