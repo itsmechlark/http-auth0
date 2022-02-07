@@ -76,7 +76,7 @@ RSpec.describe(HTTP::Auth0::Middleware) do
 
       it do
         middleware.on_request(env)
-        expect(env.request_headers["Authorization"]).to(eq(access_token))
+        expect(env.request_headers["Authorization"]).to(eq("Bearer #{access_token}"))
       end
     end
   end

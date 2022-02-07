@@ -17,7 +17,7 @@ module HTTP
       def on_request(env)
         return if env.request_headers[KEY]
 
-        env.request_headers[KEY] = auth0_token(env)
+        env.request_headers[KEY] = "Bearer #{auth0_token(env)}"
       end
 
       private
