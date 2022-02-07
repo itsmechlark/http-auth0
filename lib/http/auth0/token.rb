@@ -58,16 +58,16 @@ module HTTP
         request.body = body.map { |key, value| "#{key}=#{value}" }.join("&")
 
         response = http.request(request)
+        body = response.read_body
 
         case response
         when Net::HTTPSuccess
-          body = response.read_body
           auth0_response = JSON.parse(body)
           auth0_response["access_token"].tap do |access_token|
             access_tokens[aud] = access_token
           end
         else
-          config.logger.warn(response.message)
+          config.logger.warn("#{response.message}: #{body}")
           nil
         end
       end
