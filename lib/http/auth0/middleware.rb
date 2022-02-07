@@ -25,6 +25,10 @@ module HTTP
       # @param env [Faraday::Env]
       # @return [String] a header value
       def auth0_token(env)
+        uri = env.url.to_s
+        aud_uri = URI.parse(uri)
+        aud_uri.fragment = aud_uri.query = nil
+        Auth0.token(aud: aud_uri.to_s)
       end
     end
   end
