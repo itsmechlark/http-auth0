@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "faraday"
+require "http/auth0"
 
 module HTTP
   class Auth0
@@ -17,7 +18,7 @@ module HTTP
       def on_request(env)
         return if env.request_headers[KEY]
 
-        env.request_headers[KEY] = auth0_token(env)
+        env.request_headers[KEY] = "Bearer #{auth0_token(env)}"
       end
 
       private
@@ -25,6 +26,10 @@ module HTTP
       # @param env [Faraday::Env]
       # @return [String] a header value
       def auth0_token(env)
+        uri = env.url.to_s
+        aud_uri = URI.parse(uri)
+        aud_uri.fragment = aud_uri.query = nil
+        Auth0.token(aud: aud_uri.to_s)
       end
     end
   end

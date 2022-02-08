@@ -11,3 +11,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Configuration for Auth0's domain, client ID and secret
 - Token management with refresh support when expired or almost expiring
+- Faraday request middleware support
