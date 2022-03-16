@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-rc.1] - 2022-03-16
 ### Added
-
 - Configuration for Auth0's domain, client ID and secret
 - Token management with refresh support when expired or almost expiring
 - Faraday request middleware support

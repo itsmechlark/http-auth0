@@ -4,7 +4,7 @@ require_relative "lib/http/auth0/version"
 
 Gem::Specification.new do |s|
   s.name = "http-auth0"
-  s.version = HTTP::Auth0::VERSION
+  s.version = HTTP::Auth0.gem_version
   s.authors = ["First Circle Engineering"]
   s.email = ["tech@firstcircle.com"]
 
@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.files = Dir.glob("lib/**/*") + ["README.md", "LICENSE.md"]
   s.test_files = %x(git ls-files -- spec/*).split("\n")
   s.require_paths = ["lib"]
-  s.extra_rdoc_files = ["LICENSE", "README.md"]
+  s.extra_rdoc_files = ["LICENSE.md", "README.md"]
 
   s.add_dependency("dry-configurable", "~> 0.14")
   s.add_dependency("jwt", "~> 2.3.0")
