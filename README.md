@@ -1,6 +1,6 @@
 # http-auth0
 
-[![CI](https://github.com/carabao-capital/http-auth0/actions/workflows/ci.yaml/badge.svg)](https://github.com/carabao-capital/http-auth0/actions/workflows/ci.yaml)
+[![CI](https://github.com/carabao-capital/http-auth0/actions/workflows/release.yml/badge.svg)](https://github.com/carabao-capital/http-auth0/actions/workflows/release.yml)
 
 HTTP client abstraction layer for Auth Application [RFC](https://github.com/carabao-capital/rfcs/pull/2)
 
