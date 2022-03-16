@@ -7,9 +7,9 @@ module HTTP
   class Auth0
     extend(Dry::Configurable)
 
-    setting(:client_id)
-    setting(:client_secret)
-    setting(:domain)
+    setting(:client_id, default: ENV["AUTH0_CLIENT_ID"])
+    setting(:client_secret, default: ENV["AUTH0_CLIENT_SECRET"])
+    setting(:domain, default: ENV["AUTH0_DOMAIN"])
     setting(:logger, default: Logger.new(STDOUT))
     setting(:seconds_before_refresh, default: 60)
   end

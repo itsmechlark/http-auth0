@@ -1,14 +1,24 @@
 # frozen_string_literal: true
 
 RSpec.describe(HTTP::Auth0) do
-  let(:client_id)     { "CLIENT_ID" }
-  let(:client_secret) { "CLIENT_SECRET" }
-  let(:domain)        { "firstcircle.ph" }
+  subject(:config) { described_class.config }
+
+  let(:client_id)     { Faker::Internet.unique.password }
+  let(:client_secret) { Faker::Internet.unique.password }
+  let(:domain)        { Faker::Internet.domain_name(subdomain: true) }
 
   before { described_class.reset_config }
 
-  it "has a version number" do
-    expect(HTTP::Auth0::VERSION).to(be_a(String))
+  it "defaults to ENV['AUTH0_CLIENT_ID'] for client_id" do
+    expect(config.client_id).to(eq(ENV["AUTH0_CLIENT_ID"]))
+  end
+
+  it "defaults to ENV['AUTH0_CLIENT_SECRET'] for client_secret" do
+    expect(config.client_secret).to(eq(ENV["AUTH0_CLIENT_SECRET"]))
+  end
+
+  it "defaults to ENV['AUTH0_DOMAIN'] for domain" do
+    expect(config.domain).to(eq(ENV["AUTH0_DOMAIN"]))
   end
 
   context "when configuring by passing a config block" do
@@ -21,27 +31,27 @@ RSpec.describe(HTTP::Auth0) do
         end
       end
 
-      it { expect(described_class.config.client_id).to(eq(client_id)) }
-      it { expect(described_class.config.client_secret).to(eq(client_secret)) }
-      it { expect(described_class.config.domain).to(eq(domain)) }
-      it { expect(described_class.config.logger).to(be_an_instance_of(Logger)) }
-      it { expect(described_class.config.seconds_before_refresh).to(eq(60)) }
+      it { expect(config.client_id).to(eq(client_id)) }
+      it { expect(config.client_secret).to(eq(client_secret)) }
+      it { expect(config.domain).to(eq(domain)) }
+      it { expect(config.logger).to(be_an_instance_of(Logger)) }
+      it { expect(config.seconds_before_refresh).to(eq(60)) }
     end
   end
 
   context "when configuring using .config" do
     describe ".config" do
       before do
-        described_class.config.client_id      = client_id
-        described_class.config.client_secret  = client_secret
-        described_class.config.domain         = domain
+        config.client_id      = client_id
+        config.client_secret  = client_secret
+        config.domain         = domain
       end
 
-      it { expect(described_class.config.client_id).to(eq(client_id)) }
-      it { expect(described_class.config.client_secret).to(eq(client_secret)) }
-      it { expect(described_class.config.domain).to(eq(domain)) }
-      it { expect(described_class.config.logger).to(be_an_instance_of(Logger)) }
-      it { expect(described_class.config.seconds_before_refresh).to(eq(60)) }
+      it { expect(config.client_id).to(eq(client_id)) }
+      it { expect(config.client_secret).to(eq(client_secret)) }
+      it { expect(config.domain).to(eq(domain)) }
+      it { expect(config.logger).to(be_an_instance_of(Logger)) }
+      it { expect(config.seconds_before_refresh).to(eq(60)) }
     end
   end
 end

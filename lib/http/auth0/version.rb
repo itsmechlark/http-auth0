@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module HTTP
-  module Auth0
+  class Auth0
     def self.gem_version
       Gem::Version.new(VERSION::STRING)
     end
