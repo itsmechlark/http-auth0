@@ -3,6 +3,8 @@
 require "active_support/core_ext/object/blank"
 require "dry/configurable"
 
+require_relative "auth0/token"
+
 module HTTP
   class Auth0
     extend(Dry::Configurable)
@@ -13,8 +15,11 @@ module HTTP
     setting(:domain, default: ENV["AUTH0_DOMAIN"].presence)
     setting(:logger, default: Logger.new(STDOUT))
     setting(:seconds_before_refresh, default: 60)
+
+    def self.token(aud:)
+      Token.instance.token(aud: aud)
+    end
   end
 end
 
-require_relative "auth0/token"
 require_relative "auth0/version"

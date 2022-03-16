@@ -10,7 +10,9 @@ module HTTP
   class Auth0
     class ConfigurationError < StandardError; end
 
-    class << self
+    class Token
+      include Singleton
+
       def token(aud:)
         validate_configuration(key: :client_id)
         validate_configuration(key: :client_secret)
@@ -83,6 +85,10 @@ module HTTP
 
       def issuer
         "https://#{config.custom_domain || config.domain}"
+      end
+
+      def config
+        ::HTTP::Auth0.config
       end
     end
   end

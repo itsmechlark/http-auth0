@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-RSpec.describe("HTTP::Auth0") do
-  let(:auth0) { HTTP::Auth0 }
+RSpec.describe(HTTP::Auth0::Token) do
+  let(:auth0) { described_class.instance }
   let(:aud) { "https://mirror.app.firstcircle.ph" }
 
   before { auth0.instance_variable_set(:@access_tokens, {}) }
 
   context "when client_id is nil" do
-    before { auth0.config.client_id = nil }
+    before { HTTP::Auth0.config.client_id = nil }
 
-    after { auth0.reset_config }
+    after { HTTP::Auth0.reset_config }
 
     it do
       expect { auth0.token(aud: aud) }.to(raise_error(
@@ -20,9 +20,9 @@ RSpec.describe("HTTP::Auth0") do
   end
 
   context "when client_secret is nil" do
-    before { auth0.config.client_secret = nil }
+    before { HTTP::Auth0.config.client_secret = nil }
 
-    after { auth0.reset_config }
+    after { HTTP::Auth0.reset_config }
 
     it do
       expect { auth0.token(aud: aud) }.to(raise_error(
@@ -47,33 +47,25 @@ RSpec.describe("HTTP::Auth0") do
 
     it "returns cached token" do
       expect(auth0).not_to(have_received(:request_access_token))
-      VCR.use_cassette("auth0/token") do
-        auth0.token(aud: aud)
-      end
+      auth0.token(aud: aud)
     end
 
     context "when expired" do
       it "refresh token" do
         Timecop.freeze(Time.at(1648709774))
-        VCR.use_cassette("auth0/token") do
-          auth0.token(aud: aud)
-        end
+        auth0.token(aud: aud)
         expect(auth0).to(have_received(:request_access_token))
       end
 
       it "refresh token after expiration" do
         Timecop.freeze(Time.at(1648709774 + 1))
-        VCR.use_cassette("auth0/token") do
-          auth0.token(aud: aud)
-        end
+        auth0.token(aud: aud)
         expect(auth0).to(have_received(:request_access_token))
       end
 
       it "refresh token when it's expiring relative to seconds_before_refresh" do
         Timecop.freeze(Time.at(1648709774 - 60))
-        VCR.use_cassette("auth0/token") do
-          auth0.token(aud: aud)
-        end
+        auth0.token(aud: aud)
         expect(auth0).to(have_received(:request_access_token))
       end
     end

@@ -7,7 +7,7 @@ RSpec.describe(HTTP::Auth0) do
   let(:client_secret) { Faker::Internet.unique.password }
   let(:domain)        { Faker::Internet.domain_name(subdomain: true) }
 
-  before { described_class.reset_config }
+  after { described_class.reset_config }
 
   it "defaults to ENV['AUTH0_CLIENT_ID'] for client_id" do
     expect(config.client_id).to(eq(ENV["AUTH0_CLIENT_ID"]))
