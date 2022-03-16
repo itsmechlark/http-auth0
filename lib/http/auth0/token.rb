@@ -46,7 +46,7 @@ module HTTP
       end
 
       def request_access_token(aud:)
-        url = URI("https://#{config.domain}/oauth/token")
+        url = URI("#{issuer}/oauth/token")
         http = Net::HTTP.new(url.host, url.port)
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_PEER
@@ -79,6 +79,10 @@ module HTTP
           client_secret: config.client_secret,
           grant_type: "client_credentials",
         }
+      end
+
+      def issuer
+        "https://#{config.custom_domain || config.domain}"
       end
     end
   end
