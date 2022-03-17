@@ -1,0 +1,84 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://[AUTH0_DOMAIN]/oauth/token
+    body:
+      encoding: UTF-8
+      string: audience=https://mirror.app.firstcircle.ph&client_id=[AUTH0_CLIENT_ID]&client_secret=[AUTH0_CLIENT_SECRET]&grant_type=client_credentials
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - "[AUTH0_DOMAIN]"
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 16 Mar 2022 06:56:14 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cf-Ray:
+      - 6ecb9674fae9392d-KUL
+      Cache-Control:
+      - no-store
+      Set-Cookie:
+      - __cf_bm=4tNTDzhm6rcpIQtjEgwnZm7uhgWsFiNFvDzun9MaqUI-1647413774-0-AZc8VzCb4hAgEIvDIYalatYRl2vN1OR2cwtyuphjbw030xp7CVXo3l/ptU+45QPtn7EpwJaCZfJtv84nsDrA4sA=;
+        path=/; expires=Wed, 16-Mar-22 07:26:14 GMT; domain=.eu.auth0.com; HttpOnly;
+        Secure; SameSite=None
+      - did=s%3Av0%3A2b9ad440-a4f6-11ec-b016-a9709f303244.2Srl74DcAX8J6csc3JI3iANNnkLwV%2FvJ2wtCycTmtzg;
+        Max-Age=31557600; Path=/; Expires=Thu, 16 Mar 2023 12:56:14 GMT; HttpOnly;
+        Secure; SameSite=None
+      - did_compat=s%3Av0%3A2b9ad440-a4f6-11ec-b016-a9709f303244.2Srl74DcAX8J6csc3JI3iANNnkLwV%2FvJ2wtCycTmtzg;
+        Max-Age=31557600; Path=/; Expires=Thu, 16 Mar 2023 12:56:14 GMT; HttpOnly;
+        Secure
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding, Origin
+      Cf-Cache-Status:
+      - DYNAMIC
+      Expect-Ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Ot-Baggage-Auth0-Request-Id:
+      - 6ecb9674fae9392d
+      Ot-Tracer-Sampled:
+      - 'true'
+      Ot-Tracer-Spanid:
+      - 4718d7842af7aa7c
+      Ot-Tracer-Traceid:
+      - 2a28161d53f05ac8
+      Pragma:
+      - no-cache
+      X-Auth0-Requestid:
+      - 9a31b820fde2db70039f
+      X-Content-Type-Options:
+      - nosniff
+      X-Ratelimit-Limit:
+      - '1000000'
+      X-Ratelimit-Remaining:
+      - '999999'
+      X-Ratelimit-Reset:
+      - '1647413775'
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"access_token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ikl4aTdVSHdURGhWOFpJWmFJNnNFUyJ9.eyJpc3MiOiJodHRwczovL2ZpcnN0Y2lyY2xlLXRlc3QuZXUuYXV0aDAuY29tLyIsInN1YiI6Im1XQ1dOTURreldicEd2OVE1R05wekROSUFjOU5UVTlXQGNsaWVudHMiLCJhdWQiOiJodHRwczovL21pcnJvci5hcHAuZmlyc3RjaXJjbGUucGgiLCJpYXQiOjE2NDc0MTM3NzQsImV4cCI6MTY0ODcwOTc3NCwiYXpwIjoibVdDV05NRGt6V2JwR3Y5UTVHTnB6RE5JQWM5TlRVOVciLCJzY29wZSI6ImxvZ2luX2FzX3VzZXIgc3VwcGxpZXJfcGF5bWVudHNfbWFya19hc19wYWlkIiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIiwicGVybWlzc2lvbnMiOlsibG9naW5fYXNfdXNlciIsInN1cHBsaWVyX3BheW1lbnRzX21hcmtfYXNfcGFpZCJdfQ.eMck-GBG-lG18hTWyuiObV7Q2yZs5VWCMZu6ZFMyKyrh9WnpJWvemxmWcsHX9q3EvtJRP4noMEZccnJ2l-CeVIbpHcn-I332srbSRmRZcOxvxlwBnKBzV46CsOFUKTfW6h_hrlWcMFEMBnjVPvGT5ngOhwOb0ZLZHS9OueaAvydjsY5sWiU-1k0FuG9J5Ewgr5YkCRu8kzwPcoLvahTgeJEW5m6mowsIlSoJG0rCpwF88hYbMwYmAvPz9ArYyLChc4fjtcYusdNm2dJQU99mJe3ukxp5orBCsbCTU9LgFsryBYl0tCTJOju-2Q1h4kRAtIZ-vVY-93iER8SNgqiF2g","scope":"login_as_user
+        supplier_payments_mark_as_paid","expires_in":1296000,"token_type":"Bearer"}'
+  recorded_at: Wed, 16 Mar 2022 06:56:14 GMT
+recorded_with: VCR 6.1.0
