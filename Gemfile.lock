@@ -33,7 +33,7 @@ GEM
     dry-core (0.9.1)
       concurrent-ruby (~> 1.0)
       zeitwerk (~> 2.6)
-    faker (2.23.0)
+    faker (3.2.1)
       i18n (>= 1.8.11, < 2)
     faraday (2.7.10)
       faraday-net_http (>= 2.0, < 3.1)
@@ -133,7 +133,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 2.0)
   code-scanning-rubocop
-  faker (~> 2.0)
+  faker (~> 3.2)
   faraday (~> 2.0)
   http-auth0!
   multipart-parser (~> 0.1.1)
