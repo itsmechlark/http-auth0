@@ -2,17 +2,12 @@
 
 module HTTP
   class Auth0
-    def self.gem_version
-      Gem::Version.new(VERSION::STRING)
-    end
+    VERSION = "1.0.0.rc1"
 
-    module VERSION
-      MAJOR = 1
-      MINOR = 0
-      TINY  = 0
-      PRE   = "rc1"
-
-      STRING = [MAJOR, MINOR, TINY, PRE].compact.join(".")
+    class << self
+      def gem_version
+        Gem::Version.new(VERSION)
+      end
     end
   end
 end

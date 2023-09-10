@@ -2,7 +2,7 @@
 
 RSpec.describe(HTTP::Auth0::Token) do
   let(:auth0) { described_class.instance }
-  let(:aud) { "https://mirror.app.firstcircle.ph" }
+  let(:aud) { "https://example.com" }
 
   before { auth0.instance_variable_set(:@access_tokens, {}) }
 
@@ -14,7 +14,7 @@ RSpec.describe(HTTP::Auth0::Token) do
     it do
       expect { auth0.token(aud: aud) }.to(raise_error(
         an_instance_of(HTTP::Auth0::ConfigurationError)
-          .and(having_attributes(message: "Missing client_id in configuration"))
+          .and(having_attributes(message: "Missing client_id in configuration")),
       ))
     end
   end
@@ -27,7 +27,7 @@ RSpec.describe(HTTP::Auth0::Token) do
     it do
       expect { auth0.token(aud: aud) }.to(raise_error(
         an_instance_of(HTTP::Auth0::ConfigurationError)
-          .and(having_attributes(message: "Missing client_secret in configuration"))
+          .and(having_attributes(message: "Missing client_secret in configuration")),
       ))
     end
   end

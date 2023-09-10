@@ -5,7 +5,7 @@ http_interactions:
     uri: https://[AUTH0_DOMAIN]/oauth/token
     body:
       encoding: UTF-8
-      string: audience=https://mirror.app.firstcircle.ph&client_id=[AUTH0_CLIENT_ID]&client_secret=[AUTH0_CLIENT_SECRET]&grant_type=client_credentials
+      string: audience=https://example.com&client_id=[AUTH0_CLIENT_ID]&client_secret=[AUTH0_CLIENT_SECRET]&grant_type=client_credentials
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3

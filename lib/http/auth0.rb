@@ -13,11 +13,13 @@ module HTTP
     setting(:client_secret, default: ENV["AUTH0_CLIENT_SECRET"].presence)
     setting(:custom_domain, default: ENV["AUTH0_CUSTOM_DOMAIN"].presence)
     setting(:domain, default: ENV["AUTH0_DOMAIN"].presence)
-    setting(:logger, default: Logger.new(STDOUT))
+    setting(:logger, default: Logger.new($stdout))
     setting(:seconds_before_refresh, default: 60)
 
-    def self.token(aud:)
-      Token.instance.token(aud: aud)
+    class << self
+      def token(aud:)
+        Token.instance.token(aud: aud)
+      end
     end
   end
 end

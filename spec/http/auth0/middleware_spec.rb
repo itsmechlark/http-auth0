@@ -6,7 +6,7 @@ RSpec.describe(HTTP::Auth0::Middleware) do
   let(:auth0) { HTTP::Auth0 }
 
   describe "#on_request(env)" do
-    let(:app) { instance_double("app") }
+    let(:app) { instance_double("app") } # rubocop:disable RSpec/VerifiedDoubleReference
     let(:middleware) { described_class.new(app) }
 
     context "when Authorization header is set" do
@@ -15,8 +15,8 @@ RSpec.describe(HTTP::Auth0::Middleware) do
       it do
         expect(
           middleware.on_request(
-            Struct.new(:request_headers).new(request_headers)
-          )
+            Struct.new(:request_headers).new(request_headers),
+          ),
         ).to(be_nil)
       end
     end
@@ -25,7 +25,7 @@ RSpec.describe(HTTP::Auth0::Middleware) do
       let(:env) do
         Struct.new(:request_headers, :url).new(
           {},
-          URI("https://mirror.app.firstcircle.ph")
+          URI("https://example.com"),
         )
       end
 

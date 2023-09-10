@@ -1,28 +1,35 @@
 # frozen_string_literal: true
 
-require "faker"
-
-ENV["AUTH0_CLIENT_ID"] ||= Faker::Internet.unique.password
-ENV["AUTH0_CLIENT_SECRET"] ||= Faker::Internet.unique.password
-ENV["AUTH0_DOMAIN"] ||= "auth.test.firstcircle.ph"
-
-require "pry-byebug"
-require "faraday"
-# This is the magic bit. It requires a tests suite from the Faraday gem that you can run against your adapter
-require "faraday_specs_setup"
 require "simplecov"
-require "dry/configurable/test_interface"
-require "timecop"
-require "vcr"
-require "webmock/rspec"
 
-require "http/auth0"
+if ENV["CI"]
+  require "simplecov-lcov"
+  SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
+  SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
+end
 
 SimpleCov.start do
   add_filter "/spec/"
   minimum_coverage 95
   minimum_coverage_by_file 90
 end
+
+require "faker"
+
+ENV["AUTH0_CLIENT_ID"] ||= Faker::Internet.unique.password
+ENV["AUTH0_CLIENT_SECRET"] ||= Faker::Internet.unique.password
+ENV["AUTH0_DOMAIN"] ||= "example.com"
+
+require "pry-byebug"
+require "faraday"
+# This is the magic bit. It requires a tests suite from the Faraday gem that you can run against your adapter
+require "faraday_specs_setup"
+require "dry/configurable/test_interface"
+require "timecop"
+require "vcr"
+require "webmock/rspec"
+
+require "http/auth0"
 
 VCR.configure do |config|
   config.default_cassette_options = {
