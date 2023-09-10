@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency("bundler", "~> 2.0")
   s.add_development_dependency("code-scanning-rubocop")
-  s.add_development_dependency("faker", "~> 2.0")
+  s.add_development_dependency("faker", "~> 3.2")
   s.add_development_dependency("multipart-parser", "~> 0.1.1")
   s.add_development_dependency("pry-byebug", "~> 3.7")
   s.add_development_dependency("rake", "~> 13.0")
