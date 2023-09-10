@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency("activesupport", ">= 5.2")
   s.add_dependency("dry-configurable", "~> 0.14")
-  s.add_dependency("jwt", "~> 2.3.0")
+  s.add_dependency("jwt", ">= 2.3", "< 2.8")
 
   s.add_development_dependency("faraday", "~> 2.0")
 
