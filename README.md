@@ -1,6 +1,8 @@
 # http-auth0
 
 [![CI](https://github.com/itsmechlark/http-auth0/actions/workflows/release.yml/badge.svg)](https://github.com/itsmechlark/http-auth0/actions/workflows/release.yml)
+[![Coverage Status](https://coveralls.io/repos/github/itsmechlark/http-auth0/badge.svg?branch=main)](https://coveralls.io/github/itsmechlark/http-auth0?branch=main)
+
 
 HTTP client abstraction layer for Auth Application [RFC](https://github.com/itsmechlark/rfcs/pull/2)
 
