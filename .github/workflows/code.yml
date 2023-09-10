@@ -1,0 +1,100 @@
+name: "Code Scanning"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '37 15 * * 3'
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+jobs:
+  codeql:
+    name: CodeQL Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ruby
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+      with:
+        category: "/language:ruby"
+
+  rubocop:
+    name: Rubocop
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+  
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - uses: actions/cache@v3
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0'
+        bundler-cache: false
+    - name: Install dependencies
+      run: bundle install --jobs 4 --retry 3  
+
+    - name: Rubocop run
+      run: |
+        bash -c "
+            bundle exec rubocop --require code_scanning --format CodeScanning::SarifFormatter -o rubocop.sarif
+            [[ $? -ne 2 ]]
+        "
+
+    - name: Upload Sarif output
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: rubocop.sarif
+
+#   brakeman-scan:
+#     name: Brakeman Scan
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v4
+
+#     - name: Setup Ruby
+#       uses: ruby/setup-ruby@v1
+#       with:
+#         ruby-version: '3.0'
+        
+#     - name: Setup Brakeman
+#       run: |
+#         gem install brakeman
+
+#     - name: Scan
+#       continue-on-error: true
+#       run: |
+#         brakeman -f sarif -o brakeman.sarif.json .
+
+#     - name: Upload SARIF
+#       uses: github/codeql-action/upload-sarif@v2
+#       with:
+#         sarif_file: brakeman.sarif.json
