@@ -4,7 +4,7 @@ PATH
     http-auth0 (1.0.0.rc1)
       activesupport (>= 5.2)
       dry-configurable (~> 0.14)
-      jwt (~> 2.3.0)
+      jwt (>= 2.3, < 2.8)
 
 GEM
   remote: https://rubygems.org/
@@ -43,7 +43,7 @@ GEM
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     json (2.6.3)
-    jwt (2.3.0)
+    jwt (2.7.1)
     language_server-protocol (3.17.0.3)
     method_source (1.0.0)
     minitest (5.20.0)
