@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    http-auth0 (1.0.0.rc1)
+    http-auth0 (1.0.0)
       activesupport (>= 5.2)
       dry-configurable (>= 0.14, < 2.0)
       jwt (>= 2.3, < 2.8)
@@ -27,10 +27,10 @@ GEM
       rexml
     diff-lcs (1.5.0)
     docile (1.4.0)
-    dry-configurable (1.0.1)
+    dry-configurable (1.1.0)
       dry-core (~> 1.0, < 2)
       zeitwerk (~> 2.6)
-    dry-core (1.0.0)
+    dry-core (1.0.1)
       concurrent-ruby (~> 1.0)
       zeitwerk (~> 2.6)
     faker (3.2.1)
