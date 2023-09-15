@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/itsmechlark/http-auth0/compare/v1.0.0...v1.0.1) (2023-09-10)
+
+
+### Miscellaneous
+
+* Added Gem Version badge ([ae808a4](https://github.com/itsmechlark/http-auth0/commit/ae808a4f98bec7ed0dcf573b74b71dfdf5a972cf))
+
 ## 1.0.0 (2023-09-10)
 
 
